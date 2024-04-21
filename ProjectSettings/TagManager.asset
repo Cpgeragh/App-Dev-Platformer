@@ -9,6 +9,12 @@ TagManager:
   - PlayerPig
   - Enemy
   - Ground
+  - Animal
+  - Water
+  - Plant
+  - Potion
+  - Invincibility
+  - WaterColumn
   layers:
   - Default
   - TransparentFX

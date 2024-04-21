@@ -2,32 +2,27 @@ using UnityEngine;
 
 public class PlayerCamera : MonoBehaviour
 {
-
-    // Global Variables
-    public Transform target;
-    public Vector3 offset;
-    [Range(1,10)]
-    public float smoothFactor;
+    public Transform target;          // Target to follow
+    public Vector3 offset;            // Offset from the target
+    [Range(1, 10)]
+    public float smoothFactor;        // Smooth motion factor
 
     private void FixedUpdate()
     {
-
         Follow();
-
-        // Get the height of the screen in pixels
-    int screenHeight = Screen.height;
-
-    //Debug.Log("Screen Height: " + screenHeight + " pixels");
-
     }
 
     void Follow()
     {
-
+        // Compute the target position based on the target's position and the offset
         Vector3 targetPosition = target.position + offset;
-        Vector3 smoothPosition = Vector3.Lerp(transform.position, targetPosition, smoothFactor * Time.fixedDeltaTime);
+
+        // Only use the target position's x and y, preserving the current z position of the camera
+        Vector3 smoothPosition = Vector3.Lerp(new Vector3(transform.position.x, transform.position.y, transform.position.z), 
+                                              new Vector3(targetPosition.x, targetPosition.y, transform.position.z), 
+                                              smoothFactor * Time.fixedDeltaTime);
+
+        // Update the transform's position
         transform.position = smoothPosition;
-
     }
-
 }
